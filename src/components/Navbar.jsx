@@ -200,7 +200,8 @@ const SiteNavBar = () => {
               className="btn-navy"
               size="sm"
               onClick={() =>
-                (window.location.href = "https://baza2.maktab16.uz/login")
+                (window.location.href =
+                  "https://maktab16-admin.netlify.app/login")
               }
             >
               Kirish
