@@ -153,7 +153,7 @@ const Home = () => {
                         src={
                           item.image.startsWith("http")
                             ? item.image
-                            : `http://localhost:5001${item.image}`
+                            : `https://baza2.maktab16.uz${item.image}`
                         }
                         alt={item.title}
                         className="w-100"

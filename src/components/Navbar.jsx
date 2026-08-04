@@ -125,7 +125,7 @@ const SiteNavBar = () => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onFocus={() => query.trim() && setShowDropdown(true)}
-                />
+                />{" "}
               </InputGroup>
 
               {showDropdown && (
@@ -196,7 +196,13 @@ const SiteNavBar = () => {
               )}
             </div>
 
-            <Button className="btn-navy" size="sm">
+            <Button
+              className="btn-navy"
+              size="sm"
+              onClick={() =>
+                (window.location.href = "https://baza2.maktab16.uz/login")
+              }
+            >
               Kirish
             </Button>
           </div>

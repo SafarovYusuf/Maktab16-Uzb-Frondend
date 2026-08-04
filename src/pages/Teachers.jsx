@@ -113,7 +113,7 @@ const Teachers = () => {
                   src={
                     t.img?.startsWith("http")
                       ? t.img
-                      : `http://localhost:5001${t.img}`
+                      : `https://baza2.maktab16.uz${t.img}`
                   }
                   alt={`${t.name} ${t.surname}`}
                   className="w-100"

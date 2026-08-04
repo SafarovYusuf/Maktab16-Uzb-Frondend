@@ -175,6 +175,39 @@ const About = () => {
         </Container>
       </div>
 
+      {/* Xaritasi */}
+      {school.latitude && school.longitude && (
+        <div className="bg-white py-5">
+          <Container>
+            <h2 className="section-title mb-4">Bizning manzilimiz</h2>
+            <div className="rounded-4 overflow-hidden" style={{ height: 400 }}>
+              <iframe
+                title="Maktab manzili"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                src={`https://www.openstreetmap.org/export/embed.html?bbox=${
+                  school.longitude - 0.01
+                }%2C${school.latitude - 0.01}%2C${
+                  school.longitude + 0.01
+                }%2C${school.latitude + 0.01}&layer=mapnik&marker=${
+                  school.latitude
+                }%2C${school.longitude}`}
+              />
+            </div>
+
+            <a
+              href={`https://www.openstreetmap.org/?mlat=${school.latitude}&mlon=${school.longitude}#map=17/${school.latitude}/${school.longitude}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="small fw-semibold d-inline-block mt-3"
+            >
+              Kattaroq xaritada ko'rish →
+            </a>
+          </Container>
+        </div>
+      )}
+
       {/* Yutuqlar */}
       <Container className="my-5">
         <h2 className="section-title text-center mb-4">Yutuqlarimiz</h2>

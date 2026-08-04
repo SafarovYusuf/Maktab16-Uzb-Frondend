@@ -75,7 +75,7 @@ const NewsDetail = () => {
               src={
                 item.image.startsWith("http")
                   ? item.image
-                  : `http://localhost:5001${item.image}`
+                  : `https://baza2.maktab16.uz${item.image}`
               }
               alt={item.title}
               className="w-100 rounded-4 mb-4"
@@ -105,7 +105,7 @@ const NewsDetail = () => {
                       src={
                         o.image.startsWith("http")
                           ? o.image
-                          : `http://localhost:5001${o.image}`
+                          : `https://baza2.maktab16.uz${o.image}`
                       }
                       alt={o.title}
                       style={{ width: 64, height: 64, objectFit: "cover" }}

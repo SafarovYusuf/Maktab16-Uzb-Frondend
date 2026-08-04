@@ -153,3 +153,7 @@ code {
   font-size: 13px;
   color: #334155;
 }
+
+.maplibregl-ctrl-attrib-inner {
+  display: none;
+}
