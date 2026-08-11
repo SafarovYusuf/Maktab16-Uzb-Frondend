@@ -6,6 +6,7 @@ import About from "./pages/About";
 import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import Teachers from "./pages/Teachers";
+import Students from "./pages/Students"; // ✅ Qo'shildi
 import Contact from "./pages/Contact";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/news/:id" element={<NewsDetail />} />
           <Route path="/teachers" element={<Teachers />} />
+          <Route path="/students" element={<Students />} /> {/* ✅ Qo'shildi */}
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>

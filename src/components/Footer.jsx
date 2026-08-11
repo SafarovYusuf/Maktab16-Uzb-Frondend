@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Facebook, Instagram, Telegram, Twitter } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next"; // ✅ i18n
 import api from "../api/axios";
 
 const Footer = () => {
+  const { t } = useTranslation(); // ✅
   const year = new Date().getFullYear();
 
   const [school, setSchool] = useState(null);
@@ -20,17 +22,10 @@ const Footer = () => {
         setLoading(false);
       }
     };
-
     loadSchool();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="container py-5 text-center text-muted">
-        Yuklanmoqda...
-      </div>
-    );
-  }
+  if (loading) return null;
 
   return (
     <footer className="site-footer pt-5 pb-4 mt-5">
@@ -40,30 +35,30 @@ const Footer = () => {
             <h5 className="text-white fw-bold mb-2">
               {school?.name || "School 16"}
             </h5>
-            <p className="small mb-0">
-              O'zbekiston Respublikasi Xalq ta'limi vazirligi tasarrufidagi
-              16-sonli ixtisoslashtirilgan davlat umumta'lim maktabi.
-            </p>
+            <p className="small mb-0">{t("footer_ministry")}</p>
           </Col>
           <Col xs={6} md={4}>
-            <h6>Menyular</h6>
+            <h6>{t("footer_menus")}</h6>
             <ul className="list-unstyled small">
               <li className="mb-2">
-                <a href="/">Asosiy</a>
+                <a href="/">{t("nav_home")}</a>
               </li>
               <li className="mb-2">
-                <a href="/about">Maktab haqida</a>
+                <a href="/about">{t("nav_about")}</a>
               </li>
               <li className="mb-2">
-                <a href="/news">Yangiliklar</a>
+                <a href="/news">{t("nav_news")}</a>
               </li>
               <li className="mb-2">
-                <a href="/teachers">O'qituvchilar</a>
+                <a href="/teachers">{t("nav_teachers")}</a>
+              </li>
+              <li className="mb-2">
+                <a href="/students">{t("nav_students")}</a>
               </li>
             </ul>
           </Col>
           <Col xs={6} md={4}>
-            <h6>Bog'lanish</h6>
+            <h6>{t("nav_contact")}</h6>
             <ul className="list-unstyled small">
               <li className="mb-2">{school?.address || "—"}</li>
               <li className="mb-2">{school?.phone || "—"}</li>
@@ -74,8 +69,7 @@ const Footer = () => {
         <hr className="border-secondary my-4" />
         <Row className="align-items-center g-3">
           <Col xs={12} md={6} className="small">
-            © {year} {school?.name || "School 16"}. Barcha huquqlar
-            himoyalangan.
+            © {year} {school?.name || "School 16"}. {t("footer_rights")}
           </Col>
           <Col xs={12} md={6} className="d-flex gap-3 justify-content-md-end">
             <a href="#">

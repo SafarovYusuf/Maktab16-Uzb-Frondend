@@ -84,7 +84,7 @@ const News = () => {
                     src={
                       item.image.startsWith("http")
                         ? item.image
-                        : `https://maktab16.uz${item.image}`
+                        : `https://16.maktab16.uz${item.image}`
                     }
                     alt={item.title}
                     className="w-100"

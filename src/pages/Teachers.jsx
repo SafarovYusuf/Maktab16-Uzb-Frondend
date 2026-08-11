@@ -8,89 +8,41 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Search, EnvelopeFill, TelephoneFill } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next";
 import api from "../api/axios";
 
-const filters = [
-  "Barchasi",
-  "Aniq fanlar",
-  "Tabiiy fanlar",
-  "Gumanitar fanlar",
-  "Chet tillari",
-];
-
 const Teachers = () => {
+  const { t } = useTranslation();
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("Barchasi");
 
   useEffect(() => {
-    const load = async () => {
-      try {
-        const { data } = await api.get("/teachers");
-        setTeachers(data);
-      } catch (err) {
-        console.error("O'qituvchilarni yuklashda xato:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
+    api
+      .get("/teachers")
+      .then(({ data }) => setTeachers(data))
+      .finally(() => setLoading(false));
   }, []);
 
-  const filtered = teachers.filter((t) => {
-    const matchesQuery = `${t.name} ${t.surname} ${t.subject}`
+  const filtered = teachers.filter((item) =>
+    `${item.name} ${item.surname} ${item.subject}`
       .toLowerCase()
-      .includes(query.toLowerCase());
-    const matchesFilter =
-      activeFilter === "Barchasi" || t.category === activeFilter;
-    return matchesQuery && matchesFilter;
-  });
-
-  const [visibleContacts, setVisibleContacts] = useState({});
-
-  const toggleContact = (id, field) => {
-    setVisibleContacts((prev) => ({
-      ...prev,
-      [id]: {
-        ...prev[id],
-        [field]: !prev[id]?.[field],
-      },
-    }));
-  };
+      .includes(query.toLowerCase()),
+  );
 
   return (
     <Container className="py-5">
-      <h1 className="section-title mb-2">Bizning ahil va tajribali jamoamiz</h1>
-      <p className="text-muted mb-4">
-        Maktabimizning har bir o'qituvchisi o'z sohasi bo'yicha yuqori malakaga
-        ega va o'quvchilarga sifatli ta'lim berish yo'lida tinimsiz mehnat
-        qiladi.
-      </p>
+      <h1 className="section-title mb-2">{t("teachers_title")}</h1>
+      <p className="text-muted mb-4">{t("teachers_subtitle")}</p>
 
-      <Row className="align-items-center g-3 mb-4">
-        <Col xs={12} md={8}>
-          <div className="d-flex flex-wrap gap-2">
-            {filters.map((f) => (
-              <button
-                key={f}
-                onClick={() => setActiveFilter(f)}
-                className={`btn btn-sm rounded-pill px-3 ${
-                  activeFilter === f ? "btn-navy" : "btn-outline-secondary"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-        </Col>
-        <Col xs={12} md={4}>
+      <Row className="mb-4">
+        <Col xs={12} md={6}>
           <InputGroup>
             <InputGroup.Text className="bg-white">
               <Search size={14} />
             </InputGroup.Text>
             <Form.Control
-              placeholder="Ism yoki fan bo'yicha qidirish..."
+              placeholder={t("search_teacher")}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -100,48 +52,30 @@ const Teachers = () => {
 
       {loading ? (
         <div className="text-center py-5">
-          <Spinner animation="border" variant="secondary" />
+          <Spinner animation="border" />
         </div>
-      ) : filtered.length === 0 ? (
-        <p className="text-muted text-center py-5">Hech kim topilmadi</p>
       ) : (
         <Row className="g-4">
-          {filtered.map((t) => (
-            <Col xs={12} sm={6} lg={3} key={t._id}>
+          {filtered.map((item) => (
+            <Col xs={12} sm={6} lg={3} key={item._id}>
               <div className="surface-card overflow-hidden h-100 hover-lift">
                 <img
                   src={
-                    t.img?.startsWith("http")
-                      ? t.img
-                      : `https://maktab16.uz${t.img}`
+                    item.img?.startsWith("http")
+                      ? item.img
+                      : `https://16.maktab16.uz${item.img}`
                   }
-                  alt={`${t.name} ${t.surname}`}
+                  alt={item.name}
                   className="w-100"
                   style={{ height: 200, objectFit: "cover" }}
                 />
                 <div className="p-3">
-                  <div className="d-flex justify-content-between align-items-center mb-2">
-                    <span className="tag-pill">{t.subject}</span>
-                    <span className="small text-muted">
-                      {t.experience} yil tajriba
-                    </span>
+                  <span className="tag-pill">{item.subject}</span>
+                  <div className="fw-bold text-navy mt-2">
+                    {item.name} {item.surname}
                   </div>
-                  <div className="fw-bold text-navy">
-                    {t.name} {t.surname}
-                  </div>
-                  <div className="small text-muted mb-3">
-                    {t.bio || t.subject}
-                  </div>
-
-                  <div className="d-online  border-top ">
-                    <div className="d-flex gap-3">
-                      <EnvelopeFill size={14} className="text-muted mt-1" />
-                      <div>{t.email}</div>
-                    </div>
-                    <div className="d-flex gap-3">
-                      <TelephoneFill size={14} className="text-muted mt-1" />
-                      <div>{t.phone}</div>
-                    </div>
+                  <div className="small text-muted">
+                    {item.experience} {t("experience_years")}
                   </div>
                 </div>
               </div>

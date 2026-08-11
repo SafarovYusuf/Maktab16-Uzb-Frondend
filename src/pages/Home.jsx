@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Mortarboard, CalendarEvent, Book } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next";
 import api from "../api/axios";
 
-const quickLinks = [
-  { icon: <Mortarboard size={22} />, title: "O'quv rejasi" },
-  { icon: <CalendarEvent size={22} />, title: "Dars jadvali", active: true },
-  { icon: <Book size={22} />, title: "Kutubxona" },
-];
-
 const Home = () => {
+  const { t } = useTranslation();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,10 +20,7 @@ const Home = () => {
     const loadNews = async () => {
       try {
         const { data } = await api.get("/news");
-        const published = data
-          .filter((item) => item.status === "published")
-          .slice(0, 3);
-        setNews(published);
+        setNews(data.slice(0, 3));
       } catch (err) {
         console.error("Yangiliklarni yuklashda xato:", err);
       } finally {
@@ -56,11 +48,12 @@ const Home = () => {
     loadSchool();
   }, []);
 
+  // ✅ Dinamik va har safar o'zgarganda qayta hisoblanadigan stats:
   const stats = [
-    { value: school.studentCount, label: "O'quvchilar" },
-    { value: school.teacherCount, label: "O'qituvchilar" },
-    { value: school.classRoomCount, label: "Sinfxonalar" },
-    { value: school.roomCount, label: "To'garak xonalari" },
+    { value: school.studentCount, label: t("stat_students") },
+    { value: school.teacherCount, label: t("stat_teachers") },
+    { value: school.classRoomCount, label: t("stat_classrooms") },
+    { value: school.roomCount, label: t("stat_clubs") },
   ];
 
   return (
@@ -74,19 +67,14 @@ const Home = () => {
           />
           <div className="hero-overlay" />
           <div className="hero-content text-white" style={{ maxWidth: 560 }}>
-            <h1 className="fw-bold display-6">
-              16-sonli umumta'lim maktabiga xush kelibsiz
-            </h1>
-            <p className="mb-4 opacity-75">
-              Zamonaviy ta'lim standartlari, malakali pedagoglar jamoasi va
-              farzandingiz porloq kelajagi uchun barcha qulayliklar.
-            </p>
+            <h1 className="fw-bold display-6">{t("hero_title")}</h1>
+            <p className="mb-4 opacity-75">{t("hero_desc")}</p>
             <div className="d-flex flex-wrap gap-2">
               <Button as={Link} to="/about" className="btn-gold">
-                Batafsil
+                {t("btn_more")}
               </Button>
               <Button as={Link} to="/contact" variant="outline-light">
-                Bog'lanish
+                {t("btn_contact")}
               </Button>
             </div>
           </div>
@@ -97,8 +85,8 @@ const Home = () => {
       <div className="stats-bar mx-2 rounded-5 mt-4 py-4">
         <Container>
           <Row className="text-center g-3">
-            {stats.map((s) => (
-              <Col xs={6} md={3} key={s.label}>
+            {stats.map((s, idx) => (
+              <Col xs={6} md={3} key={idx}>
                 <div className="stat-value">{s.value}</div>
                 <div className="stat-label">{s.label}</div>
               </Col>
@@ -107,39 +95,20 @@ const Home = () => {
         </Container>
       </div>
 
-      {/* ---------- TEZKOR HAVOLALAR ---------- */}
-      {/* <Container className="my-5">
-        <h2 className="section-title mb-4">Tezkor havolalar</h2>
-        <Row className="g-3">
-          {quickLinks.map((q) => (
-            <Col xs={12} md={4} key={q.title}>
-              <div
-                className={`p-4 rounded-4 h-100 d-flex flex-column justify-content-between hover-lift ${
-                  q.active ? "bg-navy text-white" : "surface-card"
-                }`}
-              >
-                <div>{q.icon}</div>
-                <div className="fw-semibold mt-4">{q.title}</div>
-              </div>
-            </Col>
-          ))}
-        </Row>
-      </Container> */}
-
       {/* ---------- SO'NGGI YANGILIKLAR ---------- */}
       <div className="bg-white py-5">
         <Container>
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="section-title mb-0">So'nggi yangiliklar</h2>
+            <h2 className="section-title mb-0">{t("latest_news")}</h2>
             <Link to="/news" className="small fw-semibold">
-              Barcha yangiliklar →
+              {t("all_news_link")}
             </Link>
           </div>
 
           {loading ? (
             <p className="text-muted">Yuklanmoqda...</p>
           ) : news.length === 0 ? (
-            <p className="text-muted">Hozircha yangiliklar yo'q</p>
+            <p className="text-muted">{t("no_news")}</p>
           ) : (
             <Row className="g-4">
               {news.map((item) => (
@@ -153,7 +122,7 @@ const Home = () => {
                         src={
                           item.image.startsWith("http")
                             ? item.image
-                            : `https://maktab16.uz${item.image}`
+                            : `https://16.maktab16.uz${item.image}`
                         }
                         alt={item.title}
                         className="w-100"
@@ -173,31 +142,6 @@ const Home = () => {
           )}
         </Container>
       </div>
-
-      {/* ---------- OBUNA BLOKI ---------- */}
-      {/* <Container className="my-5">
-        <div className="bg-navy rounded-4 p-4 p-md-5 text-white">
-          <Row className="align-items-center g-4">
-            <Col xs={12} md={7}>
-              <h3 className="fw-bold mb-2">Yangiliklardan xabardor bo'ling</h3>
-              <p className="opacity-75 mb-0">
-                Maktabimiz hayotidagi eng muhim voqealar va yangiliklarni
-                elektron pochtangizga qabul qiling.
-              </p>
-            </Col>
-            <Col xs={12} md={5}>
-              <Form className="d-flex flex-column flex-sm-row gap-2">
-                <Form.Control
-                  type="email"
-                  placeholder="Email manzilingiz"
-                  className="flex-grow-1"
-                />
-                <Button className="btn-gold text-nowrap" >Obuna bo'lish</Button>
-              </Form>
-            </Col>
-          </Row>
-        </div>
-      </Container> */}
     </div>
   );
 };

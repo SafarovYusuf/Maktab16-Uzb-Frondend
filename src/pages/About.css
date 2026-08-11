@@ -1,0 +1,99 @@
+/* About Page Styles */
+.about-hero {
+  position: relative;
+  background: linear-gradient(135deg, #0a3d1f 0%, #1e6b3e 50%, #2ecc71 100%);
+  padding: 80px 0 60px;
+  color: #fff;
+  border-radius: 0 0 32px 32px;
+}
+
+.about-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.about-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.about-hero-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.about-hero-desc {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 650px;
+  margin-bottom: 36px;
+}
+
+.about-hero-stats {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.about-hero-stat-item h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  color: #91ca56;
+}
+
+.about-hero-stat-item p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.about-director-card {
+  background: linear-gradient(135deg, #1e6b3e 0%, #0a3d1f 100%);
+}
+
+.about-avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.about-value-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.about-value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
+}
+
+.about-facility-card {
+  transition: transform 0.3s ease;
+}
+
+.about-facility-card:hover {
+  transform: translateY(-5px);
+}
+
+.text-white-80 {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.border-white-20 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}

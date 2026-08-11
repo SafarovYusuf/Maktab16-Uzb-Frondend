@@ -1,0 +1,465 @@
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+
+const resources = {
+  uz: {
+    translation: {
+      // Navbar
+      nav_home: "Asosiy",
+      nav_about: "Maktab haqida",
+      nav_news: "Yangiliklar",
+      nav_teachers: "O'qituvchilar",
+      nav_students: "O'quvchilar",
+      nav_contact: "Aloqa",
+      nav_login: "Kirish",
+      search_placeholder: "Qidiruv...",
+      searching: "Qidirilmoqda...",
+      no_results: "Hech narsa topilmadi",
+
+      // Home Page & Stats
+      hero_title: "16-sonli umumta'lim maktabiga xush kelibsiz",
+      hero_desc:
+        "Zamonaviy ta'lim standartlari, malakali pedagoglar jamoasi va farzandingiz porloq kelajagi uchun barcha qulayliklar.",
+      btn_more: "Batafsil",
+      btn_contact: "Bog'lanish",
+      students_count: "O'quvchilar",
+      teachers_count: "O'qituvchilar",
+      classrooms_count: "Sinfxonalar",
+      clubs_count: "To'garak xonalari",
+      stat_students: "O'quvchilar",
+      stat_teachers: "O'qituvchilar",
+      stat_classrooms: "Sinfxonalar",
+      stat_clubs: "To'garak xonalari",
+      latest_news: "So'nggi yangiliklar",
+      all_news_link: "Barcha yangiliklar →",
+      no_news: "Hozircha yangiliklar yo'q",
+
+      // About Page
+      about_title: "An'ana va Innovatsiya Maskani",
+      about_subtitle:
+        "yildan buyon bilim va ma'rifat ulashib kelmoqda. Biz kelajak yetakchilarini tarbiyalaymiz.",
+      mission_title: "Bizning Missiyamiz",
+      mission_desc:
+        "O'quvchilarimizga nafaqat akademik bilim berish, balki ularni barkamol shaxs, vatanparvar fuqaro va global darajadagi raqobatbardosh mutaxassis qilib yetishtirishdir.",
+      tag_quality: "Sifatli ta'lim",
+      tag_discipline: "Intizom",
+      tag_future: "Kelajak",
+      mission_eyebrow: "Bizning maqsadimiz",
+      bullet_standards: "Xalqaro va milliy o'quv standartlari",
+      bullet_individual: "Har bir o'quvchiga individual yondashuv",
+      stat_experience: "yillik tajriba",
+      achiev_eyebrow: "Faxrimiz",
+      values_eyebrow: "Nimalarga ishonamiz",
+      values_title: "Bizning Qadriyatlarimiz",
+      val_1_title: "Sifatli Ta'lim",
+      val_1_desc:
+        "Zamonaviy standartlar va chuqurlashtirilgan o'quv dasturlari.",
+      val_2_title: "Tarbiya va Intizom",
+      val_2_desc: "Sog'lom ma'naviy muhit va yuksak odob-ahloq qoidalari.",
+      val_3_title: "STEM va IT",
+      val_3_desc: "Zamonaviy kompyuter va robototexnika laboratoriyalari.",
+      val_4_title: "Malakali Ustozlar",
+      val_4_desc: "Ko'p yillik tajribaga ega bo'lgan oliy toifali pedagoglar.",
+      val_5_title: "Sog'lom Muhit",
+      val_5_desc: "Sport to'garaklari va doimiy tibbiy nazorat.",
+      val_6_title: "Xalqaro Sertifikatlar",
+      val_6_desc: "IELTS, CEFR va fan olimpiadalariga maxsus tayyorlov.",
+      director_quote_text:
+        "Ta'lim — bu kelajakka kiritilgan eng katta sarmoyadir. Biz har bir o'quvchimizning bilimli, intizomli va vatanparvar bo'lib kamol topishiga bor kuchimizni qaratamiz.",
+      director_quote_author: "Maktab Rahbariyati",
+      director_quote_role: "Direktor",
+      fac_eyebrow: "Infratuzilma",
+      facilities_title: "Maktab Imkoniyatlari va Qulayliklari",
+      fac_1_title: "IT laboratoriya",
+      fac_1_desc: "Zamonaviy kompyuterlar bilan jihozlangan sinflar.",
+      fac_2_title: "Boy Kutubxona",
+      fac_2_desc: "Minglab ilmiy va badiiy adabiyotlar jamlanmasi.",
+      fac_3_title: "Sport Majmuasi",
+      fac_3_desc: "Futbol, basketbol va gimnastika maydonchalari.",
+      fac_4_title: "Shinam Oshxona",
+      fac_4_desc: "Issiq va sifatli taomlar oshxonasi.",
+      phone_label: "Telefon:",
+      worktime_label: "Ish vaqti:",
+      about_badge: "Biz haqimizda",
+      history_title: "Maktabimiz Tarixi",
+      history_desc1:
+        "o'z faoliyatini boshlagan. Dastlab kichik ta'lim muassasasi sifatida shakllangan maktabimiz, yillar davomida mintaqaning eng nufuzli ta'lim markazlaridan biriga aylandi.",
+      location_title: "Bizning manzilimiz",
+      view_larger_map: "Kattaroq xaritada ko'rish →",
+      achievements_title: "Yutuqlarimiz",
+      achiev_1_title: "Yil Maktabi",
+      achiev_1_desc: "Viloyat miqyosida eng yaxshi ko'rsatkichlar uchun.",
+      achiev_2_title: "Olimpiada",
+      achiev_2_desc: "Matematika va fizika fanlaridan respublika g'oliblari.",
+      achiev_3_title: "Sport",
+      achiev_3_desc: "Futbol va sport musobaqalarida g'oliblik.",
+      achiev_4_title: "Ustozlar",
+      achiev_4_desc: "O'qituvchilarning aksariyati oliy toifaga ega.",
+      gallery_title: "Maktab Hayotidan Lavhalar",
+      visit_title: "Maktabimizga tashrif buyuring",
+      visit_desc:
+        "Bizning muassasamiz bilan yaqinroq tanishish uchun ochiq eshiklar kuniga yoziling.",
+      map_title: "Maktab joylashuvi",
+      address_label: "Manzil:",
+      // News & News Detail
+      news_title: "Yangiliklar",
+      news_subtitle:
+        "Maktabimizdagi eng so'nggi voqealar va e'lonlar bilan tanishing.",
+      cat_all: "Barchasi",
+      cat_events: "Tadbirlar",
+      cat_announcements: "E'lonlar",
+      cat_achievements: "Yutuqlar",
+      views_count: "marta ko'rildi",
+      other_news: "Boshqa yangiliklar",
+      back_to_news: "Yangiliklarga qaytish →",
+
+      // Teachers Page
+      teachers_title: "Bizning ahil va tajribali jamoamiz",
+      teachers_subtitle:
+        "Maktabimizning har bir o'qituvchisi o'z sohasi bo'yicha yuqori malakaga ega.",
+      search_teacher: "Ism yoki fan bo'yicha qidirish...",
+      experience_years: "yil tajriba",
+
+      // Students Page
+      students_title: "Maktabimiz faxrli o'quvchilari",
+      students_subtitle:
+        "A'lo baholarga o'qiydigan va turli olimpiada g'oliblari.",
+      search_student: "Ism yoki sinf bo'yicha qidirish...",
+
+      // Contact Page
+      contact_title: "Biz bilan bog'laning",
+      contact_subtitle:
+        "Savollaringiz bormi? Bizga xabar qoldiring yoki bog'laning.",
+      info_address: "Manzilimiz",
+      info_phone: "Telefon raqamlari",
+      info_email: "Elektron pochta",
+      info_hours: "Ish vaqti",
+      work_hours_val: "Dushanba – Shanba: ",
+      send_message_title: "Xabar yuborish",
+      label_name: "Ism",
+      label_phone: "Telefon",
+      label_message: "Xabar",
+      btn_send: "Yuborish",
+      btn_sending: "Yuborilmoqda...",
+      msg_sent_success: "Xabaringiz muvaffaqiyatli yuborildi!",
+      msg_sent_error: "Xabar yuborishda xatolik yuz berdi.",
+
+      // Footer
+      footer_ministry:
+        "16-sonli ixtisoslashtirilgan davlat umumta'lim maktabi.",
+      footer_menus: "Menyular",
+      footer_rights: "Barcha huquqlar himoyalangan.",
+    },
+  },
+  //   --------------------------------------------------------------------------
+  ru: {
+    translation: {
+      // Navbar
+      nav_home: "Главная",
+      nav_about: "О школе",
+      nav_news: "Новости",
+      nav_teachers: "Учителя",
+      nav_students: "Ученики",
+      nav_contact: "Контакты",
+      nav_login: "Войти",
+      search_placeholder: "Поиск...",
+      searching: "Поиск...",
+      no_results: "Ничего не найдено",
+
+      // Home Page & Stats
+      hero_title: "Добро пожаловать в общеобразовательную школу №16",
+      hero_desc:
+        "Современные стандарты образования, команда квалифицированных педагогов и все условия для яркого будущего вашего ребенка.",
+      btn_more: "Подробнее",
+      btn_contact: "Связаться",
+      students_count: "Ученики",
+      teachers_count: "Учителя",
+      classrooms_count: "Учебные классы",
+      clubs_count: "Кружки",
+      stat_students: "Ученики",
+      stat_teachers: "Учителя",
+      stat_classrooms: "Учебные классы",
+      stat_clubs: "Кружки",
+      latest_news: "Последние новости",
+      all_news_link: "Все новости →",
+      no_news: "Пока нет новостей",
+
+      // About Page
+      about_title: "Обитель Традиций и Инноваций",
+      about_subtitle:
+        "года делится знаниями и просвещением. Мы воспитываем лидеров будущего.",
+      mission_title: "Наша Миссия",
+      mission_desc:
+        "Дать нашим ученикам не только академические знания, но и воспитать гармоничную личность, патриота и конкурентоспособного специалиста.",
+      tag_quality: "Качественное образование",
+      tag_discipline: "Дисциплина",
+      tag_future: "Будущее",
+      mission_eyebrow: "Наша цель",
+      bullet_standards:
+        "Международные и национальные образовательные стандарты",
+      bullet_individual: "Индивидуальный подход к каждому ученику",
+      stat_experience: "лет опыта",
+      achiev_eyebrow: "Наша гордость",
+      values_eyebrow: "Во что мы верим",
+      values_title: "Наши ценности",
+      val_1_title: "Качественное образование",
+      val_1_desc: "Современные стандарты и углублённые учебные программы.",
+      val_2_title: "Воспитание и дисциплина",
+      val_2_desc: "Здоровая нравственная среда и высокие этические нормы.",
+      val_3_title: "STEM и IT",
+      val_3_desc: "Современные компьютерные и робототехнические лаборатории.",
+      val_4_title: "Квалифицированные педагоги",
+      val_4_desc: "Опытные педагоги высшей категории.",
+      val_5_title: "Здоровая среда",
+      val_5_desc: "Спортивные секции и постоянный медицинский контроль.",
+      val_6_title: "Международные сертификаты",
+      val_6_desc: "Специальная подготовка к IELTS, CEFR и олимпиадам.",
+      director_quote_text:
+        "Образование — это самая большая инвестиция в будущее. Мы направляем все усилия на воспитание образованных, дисциплинированных и патриотичных учеников.",
+      director_quote_author: "Руководство школы",
+      director_quote_role: "Директор",
+      fac_eyebrow: "Инфраструктура",
+      facilities_title: "Возможности и удобства школы",
+      fac_1_title: "IT-лаборатория",
+      fac_1_desc: "Классы, оснащённые современными компьютерами.",
+      fac_2_title: "Богатая библиотека",
+      fac_2_desc: "Тысячи научных и художественных изданий.",
+      fac_3_title: "Спортивный комплекс",
+      fac_3_desc: "Футбольные, баскетбольные и гимнастические площадки.",
+      fac_4_title: "Уютная столовая",
+      fac_4_desc: "Горячее и качественное питание.",
+      phone_label: "Телефон:",
+      worktime_label: "Часы работы:",
+      about_badge: "О нас",
+      history_title: "История Нашей Школы",
+      history_desc1:
+        "начала свою деятельность. Наша школа стала одним из самых престижных учебных заведений региона.",
+      location_title: "Наш адрес",
+      view_larger_map: "Посмотреть на большой карте →",
+      achievements_title: "Наши Достижения",
+      achiev_1_title: "Школа Года",
+      achiev_1_desc: "За лучшие показатели в области.",
+      achiev_2_title: "Олимпиада",
+      achiev_2_desc: "Победители республиканских олимпиад по математике.",
+      achiev_3_title: "Спорт",
+      achiev_3_desc: "Победы в футбольных и спортивных турнирах.",
+      achiev_4_title: "Учителя",
+      achiev_4_desc: "Большинство учителей имеют высшую категорию.",
+      gallery_title: "Кадры из Школьной Жизни",
+      visit_title: "Посетите Нашу Школу",
+      visit_desc:
+        "Запишитесь на день открытых дверей, чтобы ближе познакомиться с нашей школой.",
+      map_title: "Расположение школы",
+      address_label: "Адрес:",
+
+      // News & News Detail
+      news_title: "Новости",
+      news_subtitle:
+        "Ознакомьтесь с последними событиями и объявлениями нашей школы.",
+      cat_all: "Все",
+      cat_events: "Мероприятия",
+      cat_announcements: "Объявления",
+      cat_achievements: "Достижения",
+      views_count: "просмотров",
+      other_news: "Другие новости",
+      back_to_news: "Назад к новостям →",
+
+      // Teachers Page
+      teachers_title: "Наша дружная и опытная команда",
+      teachers_subtitle:
+        "Каждый учитель нашей школы имеет высокую квалификацию.",
+      search_teacher: "Поиск по имени или предмету...",
+      experience_years: "лет стажа",
+
+      // Students Page
+      students_title: "Гордость нашей школы",
+      students_subtitle: "Отличники учебы и победители различных олимпиад.",
+      search_student: "Поиск по имени или классу...",
+
+      // Contact Page
+      contact_title: "Свяжитесь с нами",
+      contact_subtitle:
+        "Есть вопросы? Оставьте нам сообщение или свяжитесь по указанным контактам.",
+      info_address: "Наш адрес",
+      info_phone: "Телефоны",
+      info_email: "Электронная почта",
+      info_hours: "Рабочее время",
+      work_hours_val: "Понедельник – Суббота: 08:00 – 18:00",
+      send_message_title: "Отправить сообщение",
+      label_name: "Имя",
+      label_phone: "Телефон",
+      label_message: "Сообщение",
+      btn_send: "Отправить",
+      btn_sending: "Отправка...",
+      msg_sent_success: "Ваше сообщение успешно отправлено!",
+      msg_sent_error: "Произошла ошибка при отправке сообщения.",
+
+      // Footer
+      footer_ministry: "Специализированная общеобразовательная школа №16.",
+      footer_menus: "Меню",
+      footer_rights: "Все права защищены.",
+    },
+  },
+  //   ----------------------------------------------------------------------
+  en: {
+    translation: {
+      // Navbar
+      nav_home: "Home",
+      nav_about: "About Us",
+      nav_news: "News",
+      nav_teachers: "Teachers",
+      nav_students: "Students",
+      nav_contact: "Contact",
+      nav_login: "Login",
+      search_placeholder: "Search...",
+      searching: "Searching...",
+      no_results: "No results found",
+
+      // Home Page & Stats
+      hero_title: "Welcome to Secondary School No. 16",
+      hero_desc:
+        "Modern education standards, a team of qualified teachers, and all conditions for your child's bright future.",
+      btn_more: "Read More",
+      btn_contact: "Contact Us",
+      students_count: "Students",
+      teachers_count: "Teachers",
+      classrooms_count: "Classrooms",
+      clubs_count: "Clubs & Activities",
+      stat_students: "Students",
+      stat_teachers: "Teachers",
+      stat_classrooms: "Classrooms",
+      stat_clubs: "Clubs & Activities",
+      latest_news: "Latest News",
+      all_news_link: "All News →",
+      no_news: "No news available yet",
+
+      // About Page
+      about_title: "Place of Tradition & Innovation",
+      about_subtitle:
+        "has been sharing knowledge and education. We nurture future leaders.",
+      mission_title: "Our Mission",
+      mission_desc:
+        "To provide our students not only with academic knowledge, but also to raise them into patriotic citizens and competitive professionals.",
+      tag_quality: "Quality Education",
+      tag_discipline: "Discipline",
+      tag_future: "Bright Future",
+      mission_eyebrow: "Our Purpose",
+      bullet_standards: "International and national curriculum standards",
+      bullet_individual: "Individual approach to every student",
+      stat_experience: "years of experience",
+      achiev_eyebrow: "Our Pride",
+      values_eyebrow: "What We Believe In",
+      values_title: "Our Values",
+      val_1_title: "Quality Education",
+      val_1_desc: "Modern standards and advanced curricula.",
+      val_2_title: "Upbringing and Discipline",
+      val_2_desc: "A healthy moral environment and high ethical standards.",
+      val_3_title: "STEM & IT",
+      val_3_desc: "Modern computer and robotics laboratories.",
+      val_4_title: "Qualified Teachers",
+      val_4_desc: "Experienced, highly qualified educators.",
+      val_5_title: "Healthy Environment",
+      val_5_desc: "Sports clubs and regular medical checkups.",
+      val_6_title: "International Certificates",
+      val_6_desc: "Dedicated prep for IELTS, CEFR, and academic olympiads.",
+      director_quote_text:
+        "Education is the greatest investment in the future. We dedicate all our efforts to raising knowledgeable, disciplined, and patriotic students.",
+      director_quote_author: "School Administration",
+      director_quote_role: "Principal",
+      fac_eyebrow: "Infrastructure",
+      facilities_title: "School Facilities and Amenities",
+      fac_1_title: "IT Laboratory",
+      fac_1_desc: "Classrooms equipped with modern computers.",
+      fac_2_title: "Rich Library",
+      fac_2_desc: "Thousands of scientific and literary works.",
+      fac_3_title: "Sports Complex",
+      fac_3_desc: "Football, basketball, and gymnastics facilities.",
+      fac_4_title: "Cozy Cafeteria",
+      fac_4_desc: "Hot and quality meals.",
+      phone_label: "Phone:",
+      worktime_label: "Working Hours:",
+      about_badge: "About Us",
+      history_title: "History of Our School",
+      history_desc1:
+        "started its activity. Over the years, our school has become one of the most prestigious educational centers.",
+      location_title: "Our Location",
+      view_larger_map: "View on larger map →",
+      achievements_title: "Our Achievements",
+      achiev_1_title: "School of the Year",
+      achiev_1_desc: "For the best achievements in the region.",
+      achiev_2_title: "Olympiad",
+      achiev_2_desc: "Republic level champions in Mathematics and Physics.",
+      achiev_3_title: "Sports",
+      achiev_3_desc: "Victories in football and athletic tournaments.",
+      achiev_4_title: "Teachers",
+      achiev_4_desc: "Most of our teachers hold high qualifications.",
+      gallery_title: "Moments From School Life",
+      visit_title: "Visit Our School",
+      visit_desc:
+        "Sign up for an open day to get to know our institution better.",
+      map_title: "School Location",
+      address_label: "Address:",
+
+      // News & News Detail
+      news_title: "News",
+      news_subtitle:
+        "Discover the latest events and announcements from our school.",
+      cat_all: "All",
+      cat_events: "Events",
+      cat_announcements: "Announcements",
+      cat_achievements: "Achievements",
+      views_count: "views",
+      other_news: "Other News",
+      back_to_news: "Back to News →",
+
+      // Teachers Page
+      teachers_title: "Our Qualified & Friendly Staff",
+      teachers_subtitle:
+        "Every teacher in our school is highly qualified in their field.",
+      search_teacher: "Search by name or subject...",
+      experience_years: "years exp.",
+
+      // Students Page
+      students_title: "Pride of Our School",
+      students_subtitle: "Top performing students and competition winners.",
+      search_student: "Search by name or grade...",
+
+      // Contact Page
+      contact_title: "Get in Touch",
+      contact_subtitle:
+        "Have questions? Leave us a message or reach out via provided contacts.",
+      info_address: "Our Address",
+      info_phone: "Phone Numbers",
+      info_email: "Email Address",
+      info_hours: "Working Hours",
+      work_hours_val: "Monday – Saturday: 08:00 – 18:00",
+      send_message_title: "Send a Message",
+      label_name: "Name",
+      label_phone: "Phone",
+      label_message: "Message",
+      btn_send: "Send",
+      btn_sending: "Sending...",
+      msg_sent_success: "Your message has been sent successfully!",
+      msg_sent_error: "An error occurred while sending your message.",
+
+      // Footer
+      footer_ministry: "Specialized Secondary Public School No. 16.",
+      footer_menus: "Quick Links",
+      footer_rights: "All rights reserved.",
+    },
+  },
+};
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: "uz",
+    interpolation: {
+      escapeValue: false,
+    },
+  });
+
+export default i18n;
