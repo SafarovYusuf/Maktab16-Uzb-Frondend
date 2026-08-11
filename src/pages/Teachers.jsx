@@ -7,7 +7,7 @@ import {
   InputGroup,
   Spinner,
 } from "react-bootstrap";
-import { Search, EnvelopeFill, TelephoneFill } from "react-bootstrap-icons";
+import { Search } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
 import api from "../api/axios";
 

@@ -26,7 +26,7 @@ const Contact = () => {
       setStatus("sent");
       setForm({ name: "", phone: "", message: "" });
     } catch (err) {
-      setStatus("error");
+      setStatus(err);
     }
   };
 

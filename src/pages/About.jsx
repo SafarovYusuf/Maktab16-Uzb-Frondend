@@ -13,7 +13,6 @@ import {
   HeartPulseFill,
   ClockFill,
   TelephoneFill,
-  EnvelopeFill,
   CheckCircleFill,
   Quote,
 } from "react-bootstrap-icons";

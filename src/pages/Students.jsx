@@ -8,17 +8,19 @@ import {
   Spinner,
 } from "react-bootstrap";
 import { Search, EnvelopeFill, TelephoneFill } from "react-bootstrap-icons";
+import { useTranslation } from "react-i18next";
 import api from "../api/axios";
 
 const filters = [
-  "Barchasi",
-  "A'lochilar",
-  "Olimpiada g'oliblari",
-  "Sportchilar",
-  "Faollar",
+  { value: "Barchasi", key: "cat_all" },
+  { value: "A'lochilar", key: "student_cat_excellent" },
+  { value: "Olimpiada g'oliblari", key: "student_cat_olympiad" },
+  { value: "Sportchilar", key: "student_cat_athletes" },
+  { value: "Faollar", key: "student_cat_active" },
 ];
 
 const Students = () => {
+  const { t } = useTranslation();
   const [students, setStudents] = useState([]); // ✅ studentds -> students deb to'g'rilandi
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
@@ -38,35 +40,32 @@ const Students = () => {
     load();
   }, []);
 
-  const filtered = students.filter((t) => {
-    const matchesQuery = `${t.name} ${t.surname} ${t.subject || ""}`
+  const filtered = students.filter((item) => {
+    const matchesQuery = `${item.name} ${item.surname} ${item.subject || ""}`
       .toLowerCase()
       .includes(query.toLowerCase());
     const matchesFilter =
-      activeFilter === "Barchasi" || t.category === activeFilter;
+      activeFilter === "Barchasi" || item.category === activeFilter;
     return matchesQuery && matchesFilter;
   });
 
   return (
     <Container className="py-5">
-      <h1 className="section-title mb-2">Maktabimiz faxrli o'quvchilari</h1>
-      <p className="text-muted mb-4">
-        A'lo baholarga o'qiydigan, olimpiada hamda turli musobaqalar g'oliblari
-        bo'lgan o'quvchilarimiz.
-      </p>
+      <h1 className="section-title mb-2">{t("students_title")}</h1>
+      <p className="text-muted mb-4">{t("students_subtitle")}</p>
 
       <Row className="align-items-center g-3 mb-4">
         <Col xs={12} md={8}>
           <div className="d-flex flex-wrap gap-2">
             {filters.map((f) => (
               <button
-                key={f}
-                onClick={() => setActiveFilter(f)}
+                key={f.value}
+                onClick={() => setActiveFilter(f.value)}
                 className={`btn btn-sm rounded-pill px-3 ${
-                  activeFilter === f ? "btn-navy" : "btn-outline-secondary"
+                  activeFilter === f.value ? "btn-navy" : "btn-outline-secondary"
                 }`}
               >
-                {f}
+                {t(f.key)}
               </button>
             ))}
           </div>
@@ -77,7 +76,7 @@ const Students = () => {
               <Search size={14} />
             </InputGroup.Text>
             <Form.Control
-              placeholder="Ism yoki sinf bo'yicha qidirish..."
+              placeholder={t("search_student")}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -90,51 +89,53 @@ const Students = () => {
           <Spinner animation="border" variant="secondary" />
         </div>
       ) : filtered.length === 0 ? (
-        <p className="text-muted text-center py-5">Hech kim topilmadi</p>
+        <p className="text-muted text-center py-5">{t("no_students_found")}</p>
       ) : (
         <Row className="g-4">
-          {filtered.map((t) => (
-            <Col xs={12} sm={6} lg={3} key={t._id}>
+          {filtered.map((item) => (
+            <Col xs={12} sm={6} lg={3} key={item._id}>
               <div className="surface-card overflow-hidden h-100 hover-lift">
                 <img
                   src={
-                    t.img?.startsWith("http")
-                      ? t.img
-                      : `https://16.maktab16.uz${t.img}`
+                    item.img?.startsWith("http")
+                      ? item.img
+                      : `https://16.maktab16.uz${item.img}`
                   }
-                  alt={`${t.name} ${t.surname}`}
+                  alt={`${item.name} ${item.surname}`}
                   className="w-100"
                   style={{ height: 200, objectFit: "cover" }}
                 />
                 <div className="p-3">
                   <div className="d-flex justify-content-between align-items-center mb-2">
-                    <span className="tag-pill">{t.subject || "Sinf"}</span>
+                    <span className="tag-pill">
+                      {item.subject || t("default_class")}
+                    </span>
                   </div>
                   <div className="fw-bold text-navy">
-                    {t.name} {t.surname}
+                    {item.name} {item.surname}
                   </div>
                   <div className="small text-muted mb-3">
-                    {t.bio || "Maktab faol o'quvchisi"}
+                    {item.bio || t("default_student_bio")}
                   </div>
 
-                  {(t.email || t.phone) && (
+                  {(item.email || item.phone) && (
                     <div className="border-top pt-2">
-                      {t.email && (
+                      {item.email && (
                         <div className="d-flex gap-2 small text-muted">
                           <EnvelopeFill
                             size={14}
                             className="mt-1 flex-shrink-0"
                           />
-                          <div className="text-truncate">{t.email}</div>
+                          <div className="text-truncate">{item.email}</div>
                         </div>
                       )}
-                      {t.phone && (
+                      {item.phone && (
                         <div className="d-flex gap-2 small text-muted">
                           <TelephoneFill
                             size={14}
                             className="mt-1 flex-shrink-0"
                           />
-                          <div>{t.phone}</div>
+                          <div>{item.phone}</div>
                         </div>
                       )}
                     </div>

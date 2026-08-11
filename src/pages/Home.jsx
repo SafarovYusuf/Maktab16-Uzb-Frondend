@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { EnvelopeFill, CheckCircleFill } from "react-bootstrap-icons";
 import api from "../api/axios";
 
 const Home = () => {
@@ -15,6 +16,12 @@ const Home = () => {
     classRoomCount: 0,
     roomCount: 0,
   });
+
+  // ---------- Obuna formasi holati ----------
+  const [email, setEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [subscribeError, setSubscribeError] = useState("");
 
   useEffect(() => {
     const loadNews = async () => {
@@ -56,6 +63,27 @@ const Home = () => {
     { value: school.roomCount, label: t("stat_clubs") },
   ];
 
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setSubscribing(true);
+    setSubscribeError("");
+
+    try {
+      await api.post("/subscribe", { email });
+      setSubscribed(true);
+      setEmail("");
+    } catch (err) {
+      console.error("Obuna bo'lishda xato:", err);
+      setSubscribeError(
+        t("subscribe_error") || "Xatolik yuz berdi, keyinroq urinib ko'ring.",
+      );
+    } finally {
+      setSubscribing(false);
+    }
+  };
+
   return (
     <div className="container">
       {/* ---------- HERO ---------- */}
@@ -82,7 +110,7 @@ const Home = () => {
       </Container>
 
       {/* ---------- STATISTIKA ---------- */}
-      <div className="stats-bar mx-2 rounded-5 mt-4 py-4">
+      <div className="stats-bar mx-2 rounded-5 my-4 py-4">
         <Container>
           <Row className="text-center g-3">
             {stats.map((s, idx) => (
@@ -106,7 +134,7 @@ const Home = () => {
           </div>
 
           {loading ? (
-            <p className="text-muted">Yuklanmoqda...</p>
+            <p className="text-muted">{t("loading") || "Yuklanmoqda..."}</p>
           ) : news.length === 0 ? (
             <p className="text-muted">{t("no_news")}</p>
           ) : (
@@ -142,6 +170,77 @@ const Home = () => {
           )}
         </Container>
       </div>
+
+      {/* ---------- OBUNA BO'LISH (Newsletter) ---------- */}
+      <Container className="pb-5 mt-4">
+        <div
+          className="newsletter-box rounded-5 p-4 p-md-5 position-relative overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, #4b2e83 0%, #2f1c5c 100%)",
+          }}
+        >
+          <Row className="align-items-center g-4">
+            <Col xs={12} md={6}>
+              <h3 className="text-white fw-bold mb-2">
+                {t("newsletter_title") || "Yangiliklarimizdan xabardor bo'ling"}
+              </h3>
+              <p className="text-white-50 mb-0">
+                {t("newsletter_desc") ||
+                  "Maktabdagi muhim voqealar, e'lonlar va yangiliklarni to'g'ridan-to'g'ri elektron pochtangizga oling."}
+              </p>
+            </Col>
+
+            <Col xs={12} md={6}>
+              {subscribed ? (
+                <div className="d-flex align-items-center gap-2 text-white fw-semibold justify-content-md-end">
+                  <CheckCircleFill size={20} className="text-success" />
+                  {t("subscribe_success") ||
+                    "Obuna muvaffaqiyatli amalga oshdi!"}
+                </div>
+              ) : (
+                <Form
+                  onSubmit={handleSubscribe}
+                  className="d-flex flex-column flex-sm-row gap-2 justify-content-md-end"
+                >
+                  <div
+                    className="position-relative flex-grow-1"
+                    style={{ maxWidth: 320 }}
+                  >
+                    <EnvelopeFill
+                      className="position-absolute top-50 translate-middle-y text-muted"
+                      style={{ left: 14 }}
+                    />
+                    <Form.Control
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder={
+                        t("email_placeholder") || "Email manzilingiz"
+                      }
+                      className="rounded-pill ps-5 py-2 border-0"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={subscribing}
+                    className="btn-gold rounded-pill px-4 fw-semibold text-nowrap"
+                  >
+                    {subscribing
+                      ? t("subscribing") || "Yuborilmoqda..."
+                      : t("subscribe_btn") || "Obuna bo'lish"}
+                  </Button>
+                </Form>
+              )}
+              {subscribeError && (
+                <div className="text-danger small mt-2 text-md-end">
+                  {subscribeError}
+                </div>
+              )}
+            </Col>
+          </Row>
+        </div>
+      </Container>
     </div>
   );
 };

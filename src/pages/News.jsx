@@ -1,11 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { Container, Row, Col, Button, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import api from "../api/axios";
 
-const categories = ["Barchasi", "Tadbirlar", "E'lonlar", "Yutuqlar"];
+const categories = [
+  { value: "Barchasi", key: "cat_all" },
+  { value: "Tadbirlar", key: "cat_events" },
+  { value: "E'lonlar", key: "cat_announcements" },
+  { value: "Yutuqlar", key: "cat_achievements" },
+];
 
 const News = () => {
+  const { t } = useTranslation();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState("Barchasi");
@@ -41,26 +48,23 @@ const News = () => {
 
   return (
     <Container className="py-4">
-      <h1 className="fw-bold mb-1">Yangiliklar</h1>
-      <p className="text-muted mb-4">
-        Maktabimizdagi eng so'nggi voqealar, e'lonlar va o'quvchilarimizning
-        yutuqlari bilan tanishing.
-      </p>
+      <h1 className="fw-bold mb-1">{t("news_title")}</h1>
+      <p className="text-muted mb-4">{t("news_subtitle")}</p>
 
       <div className="d-flex flex-wrap gap-2 mb-4">
         {categories.map((cat) => (
           <Button
-            key={cat}
+            key={cat.value}
             size="sm"
             className={
-              active === cat
+              active === cat.value
                 ? "btn-navy rounded-pill px-3"
                 : "rounded-pill px-3"
             }
-            variant={active === cat ? undefined : "outline-secondary"}
-            onClick={() => handleCategory(cat)}
+            variant={active === cat.value ? undefined : "outline-secondary"}
+            onClick={() => handleCategory(cat.value)}
           >
-            {cat}
+            {t(cat.key)}
           </Button>
         ))}
       </div>
@@ -70,7 +74,7 @@ const News = () => {
           <Spinner animation="border" variant="secondary" />
         </div>
       ) : paginated.length === 0 ? (
-        <p className="text-muted text-center py-5">Hozircha yangiliklar yo'q</p>
+        <p className="text-muted text-center py-5">{t("no_news")}</p>
       ) : (
         <Row className="g-4">
           {paginated.map((item) => (

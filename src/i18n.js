@@ -34,6 +34,15 @@ const resources = {
       latest_news: "So'nggi yangiliklar",
       all_news_link: "Barcha yangiliklar →",
       no_news: "Hozircha yangiliklar yo'q",
+      loading: "Yuklanmoqda...",
+      newsletter_title: "Yangiliklarimizdan xabardor bo'ling",
+      newsletter_desc:
+        "Maktabdagi muhim voqealar, e'lonlar va yangiliklarni to'g'ridan-to'g'ri elektron pochtangizga oling.",
+      email_placeholder: "Email manzilingiz",
+      subscribing: "Yuborilmoqda...",
+      subscribe_btn: "Obuna bo'lish",
+      subscribe_success: "Obuna muvaffaqiyatli amalga oshdi!",
+      subscribe_error: "Xatolik yuz berdi, keyinroq urinib ko'ring.",
 
       // About Page
       about_title: "An'ana va Innovatsiya Maskani",
@@ -126,6 +135,13 @@ const resources = {
       students_subtitle:
         "A'lo baholarga o'qiydigan va turli olimpiada g'oliblari.",
       search_student: "Ism yoki sinf bo'yicha qidirish...",
+      student_cat_excellent: "A'lochilar",
+      student_cat_olympiad: "Olimpiada g'oliblari",
+      student_cat_athletes: "Sportchilar",
+      student_cat_active: "Faollar",
+      no_students_found: "Hech kim topilmadi",
+      default_class: "Sinf",
+      default_student_bio: "Maktab faol o'quvchisi",
 
       // Contact Page
       contact_title: "Biz bilan bog'laning",
@@ -184,6 +200,15 @@ const resources = {
       latest_news: "Последние новости",
       all_news_link: "Все новости →",
       no_news: "Пока нет новостей",
+      loading: "Загрузка...",
+      newsletter_title: "Будьте в курсе наших новостей",
+      newsletter_desc:
+        "Получайте важные события, объявления и новости школы прямо на вашу электронную почту.",
+      email_placeholder: "Ваш email адрес",
+      subscribing: "Отправка...",
+      subscribe_btn: "Подписаться",
+      subscribe_success: "Подписка успешно оформлена!",
+      subscribe_error: "Произошла ошибка, попробуйте позже.",
 
       // About Page
       about_title: "Обитель Традиций и Инноваций",
@@ -276,6 +301,13 @@ const resources = {
       students_title: "Гордость нашей школы",
       students_subtitle: "Отличники учебы и победители различных олимпиад.",
       search_student: "Поиск по имени или классу...",
+      student_cat_excellent: "Отличники",
+      student_cat_olympiad: "Победители олимпиад",
+      student_cat_athletes: "Спортсмены",
+      student_cat_active: "Активисты",
+      no_students_found: "Никто не найден",
+      default_class: "Класс",
+      default_student_bio: "Активный ученик школы",
 
       // Contact Page
       contact_title: "Свяжитесь с нами",
@@ -333,6 +365,15 @@ const resources = {
       latest_news: "Latest News",
       all_news_link: "All News →",
       no_news: "No news available yet",
+      loading: "Loading...",
+      newsletter_title: "Stay updated with our news",
+      newsletter_desc:
+        "Get important school events, announcements and news delivered directly to your email.",
+      email_placeholder: "Your email address",
+      subscribing: "Sending...",
+      subscribe_btn: "Subscribe",
+      subscribe_success: "Successfully subscribed!",
+      subscribe_error: "Something went wrong, please try again later.",
 
       // About Page
       about_title: "Place of Tradition & Innovation",
@@ -424,6 +465,13 @@ const resources = {
       students_title: "Pride of Our School",
       students_subtitle: "Top performing students and competition winners.",
       search_student: "Search by name or grade...",
+      student_cat_excellent: "Top Performers",
+      student_cat_olympiad: "Olympiad Winners",
+      student_cat_athletes: "Athletes",
+      student_cat_active: "Active Students",
+      no_students_found: "No one found",
+      default_class: "Class",
+      default_student_bio: "Active school student",
 
       // Contact Page
       contact_title: "Get in Touch",
